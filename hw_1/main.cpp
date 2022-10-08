@@ -2,7 +2,7 @@
 #include <memory>
 #include <cstdint>
 #include <iomanip>
-#include "array_types.hpp"
+#include "../vectors_and_matrices/array_types.hpp"
 
 #include <functional>
 #include <chrono>
@@ -52,7 +52,7 @@ int main(int argc, char* argv[])
 
     std::function<double(int)> convolution = [=](int idx) {return convolve(a, kernel)(idx);};
 
-    auto benchresult = benchmark(convolution, 0, 1000);
+    auto benchresult = benchmark(convolution, 5, 1000);
 
     std::cout << std::setprecision(std::numeric_limits<double>::digits10 + 1)
               << "Timing: " << benchresult.btime << " ms\n"
