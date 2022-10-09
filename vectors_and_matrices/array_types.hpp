@@ -4,6 +4,8 @@
 #include <memory>
 #include <cstdint>
 #include <cstring>
+#include <string>
+#include <fstream>
 
 using intptr_t = std::intptr_t;
 
@@ -40,6 +42,7 @@ class matrix final
     T& operator()(intptr_t idx) {return data[idx];}
     vec<T> row(intptr_t);
     vec<T> col(intptr_t);
+    void dump(std::string path);
 };
 
 template <class T>
@@ -59,6 +62,27 @@ vec<T> matrix<T>::col(intptr_t c)
         v(i) = data[i * nc_ + c];
     }
     return v;
+}
+template <class T>
+void matrix<T>::dump(std::string path) {
+    std::ofstream dump_file;
+    dump_file.open(path);
+
+    auto nrows = this->nrows();
+    auto ncols = this->ncols();
+
+    for(size_t row_idx = 0; row_idx < nrows; ++row_idx) {
+        for(size_t col_idx = 0; col_idx < ncols; ++col_idx) {
+            dump_file << this->operator()(row_idx, col_idx);
+            if (col_idx != ncols - 1) {
+                dump_file << " ";
+            }
+        }
+
+        dump_file << std::endl;
+    }
+
+    dump_file.close();
 }
 
 #endif
