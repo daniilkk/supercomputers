@@ -94,13 +94,14 @@ int main(int argc, char* argv[]) {
     }
 
     auto res = convolve(a, kernel);
-    res.dump(std::string("output/out.txt"));
+    // res.dump(std::string("output/out.txt"));
 
     std::function<double(int)> convolution = [=](int idx) {return convolve(a, kernel)(idx);};
 
     auto benchresult = benchmark(convolution, 0, 1000);
 
     std::cout << std::setprecision(std::numeric_limits<double>::digits10 + 1)
+              << "N = " << a.ncols() << std::endl
               << "Timing: " << benchresult.btime << " ms\n"
               << "Answer = " << benchresult.result
               << std::endl;
