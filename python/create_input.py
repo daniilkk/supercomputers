@@ -3,11 +3,11 @@ from argparse import Namespace, ArgumentParser
 import numpy as np
 
 
-def save_to_file(matrix: np.ndarray, kernel: np.ndarray):
+def save_to_file(matrix: np.ndarray, kernel: np.ndarray, kernel_type: str):
     n = matrix.shape[0]
     k = kernel.shape[0]
 
-    with open(f'input/{n}_{k}.txt', 'w') as f:
+    with open(f'input/{n}_{k}_{kernel_type}.txt', 'w') as f:
         f.write(f'{n}\n')
 
         for idx in range(n):
@@ -20,13 +20,20 @@ def save_to_file(matrix: np.ndarray, kernel: np.ndarray):
 
 
 def main(args: Namespace):
-    matrix = np.random.randint(0, 10, (args.matrix_size, args.matrix_size))
-    kernel = np.zeros((args.kernel_size, args.kernel_size), dtype=np.int32)
+    matrix = (np.random.rand(args.matrix_size, args.matrix_size) - 0.5) * 10
 
-    kernel_central_idx = (args.kernel_size - 1) // 2
-    kernel[kernel_central_idx, kernel_central_idx] = 1
+    if args.kernel_type == 'id':
+        kernel = np.zeros((args.kernel_size, args.kernel_size), dtype=np.int32)
+        kernel_central_idx = (args.kernel_size - 1) // 2
+        kernel[kernel_central_idx, kernel_central_idx] = 1
 
-    save_to_file(matrix, kernel)
+    elif args.kernel_type == 'random':
+        kernel = (np.random.rand(args.kernel_size, args.kernel_size) - 0.5) * 10
+
+    else:
+        raise RuntimeError(f'Wrong kernel type: {args.kernel_type}')
+
+    save_to_file(matrix, kernel, args.kernel_type)
 
 
 if __name__ == '__main__':

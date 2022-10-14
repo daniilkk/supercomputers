@@ -76,7 +76,7 @@ def benchmark(fn: Callable[[int], np.float64], fn_input: int, n_repeat: int):
     for _ in range(n_repeat):
         result = fn(fn_input)
     end = time.perf_counter()
-    ms_per_run = (end - start) * 1000
+    ms_per_run = (end - start) * 1000 / n_repeat
 
     return result, ms_per_run
 
