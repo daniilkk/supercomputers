@@ -1,4 +1,5 @@
 from argparse import Namespace, ArgumentParser
+import os
 
 import numpy as np
 
@@ -6,6 +7,9 @@ import numpy as np
 def save_to_file(matrix: np.ndarray, kernel: np.ndarray, kernel_type: str):
     n = matrix.shape[0]
     k = kernel.shape[0]
+
+    if not os.path.isdir('input'):
+        os.makedirs('input', exist_ok=True) 
 
     with open(f'input/{n}_{k}_{kernel_type}.txt', 'w') as f:
         f.write(f'{n}\n')
