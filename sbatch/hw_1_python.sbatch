@@ -9,6 +9,8 @@
 #SBATCH --cpus-per-task=1          # Требуемое кол-во CPU
 #SBATCH --constraint=type_d
 
+#source /home/dkrasilnikov/supercomputers/venv/bin/activate
+module load Python
 for i in $(seq 100 100 1000); do
-	python3.10 ./python/hw_1.py < ./input/${i}_5_random.txt
+	python3 ./python/hw_1.py < ./input/${i}_5_random.txt
 done
