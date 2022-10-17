@@ -10,5 +10,5 @@
 #SBATCH --constraint=type_d
 
 for i in $(seq 100 100 1000); do
-	./build/work1 < ./input/${i}_5_random.txt
+	python3.10 ./python/hw_1.py < ./input/${i}_5_random.txt
 done
