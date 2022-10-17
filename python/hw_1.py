@@ -85,8 +85,9 @@ def main():
     A, kernel = read_input()
 
     convolution = lambda idx: convolve(A, kernel).flat[idx]
-    result, btime = benchmark(convolution, 0, 1000)
+    result, btime = benchmark(convolution, 0, 50)
 
+    print(f'N = {A.shape[0]}')
     print(f'Timing: {btime:.2f} ms')
     print(f'Answer = {result}')
 
