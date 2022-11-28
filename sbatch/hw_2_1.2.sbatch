@@ -10,17 +10,7 @@
 #SBATCH --constraint="type_a|type_b|type_c|type_d"
 #SBATCH --time=2
 
-export OMP_NUM_THREADS=1
-./build/hw_2_1.2 < ./input/hw_2_1.2.txt
-
-export OMP_NUM_THREADS=2 
-./build/hw_2_1.2 < ./input/hw_2_1.2.txt
-
-export OMP_NUM_THREADS=4
-./build/hw_2_1.2 < ./input/hw_2_1.2.txt
-
-export OMP_NUM_THREADS=8
-./build/hw_2_1.2 < ./input/hw_2_1.2.txt
-
-export OMP_NUM_THREADS=16
-./build/hw_2_1.2 < ./input/hw_2_1.2.txt
+for n_threads in 1 2 4 8 16; do
+    export OMP_NUM_THREADS=$n_threads
+    ./build/hw_2_1.2 < ./input/hw_2_1.2.txt
+done
