@@ -7,7 +7,7 @@
 #SBATCH --nodes=1                  # Требуемое кол-во узлов
 #SBATCH --gpus=0                   # Требуемое кол-во GPU
 #SBATCH --cpus-per-task=4          # Требуемое кол-во CPU
-#SBATCH --constraint=type_d
+#SBATCH --constraint="type_a|type_b|type_c|type_d|type_e"
 
 export OMP_NUM_THREADS=1
 
