@@ -8,6 +8,7 @@
 #SBATCH --gpus=1                   # Требуемое кол-во GPU
 #SBATCH --cpus-per-task=4          # Требуемое кол-во CPU
 #SBATCH --constraint="type_a|type_b|type_c|type_d|type_e"
+#SBATCH --time=1
 
 export OMP_NUM_THREADS=1
 
