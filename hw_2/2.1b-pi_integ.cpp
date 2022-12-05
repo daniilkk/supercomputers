@@ -18,15 +18,13 @@ double pi_integ(ptrdiff_t npoints)
     double xmin = -10, xmax = 10;
     double h = (xmax - xmin) / npoints;
     double integral = 0;
-    #pragma omp parallel for
+    #pragma omp parallel for reduction(+ : integral)
     for (ptrdiff_t i=0; i<npoints; i++)
     {
         double x_i = xmin + (i + 0.5) * h;
         double func_i = exp(- x_i * x_i / 2);
-        #pragma omp critical
-        {
-            integral += func_i;
-        }
+        
+        integral += func_i;
     }
     integral *= h;
     double pi_est = integral * integral / 2;

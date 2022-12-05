@@ -6,7 +6,7 @@
 
 #include <omp.h>
 
-#include "vectors_and_matrices/array_types.hpp"
+#include "../vectors_and_matrices/array_types.hpp"
 
 using std::cin;
 using std::cout;
@@ -18,12 +18,14 @@ const double PI = 3.141592653589793;
 double mc_pi(ptrdiff_t niter, size_t seed)
 {
     double num_crosses = 0;
-    std::mt19937_64 rng(seed);
-    std::normal_distribution<> rand_nrm(0.0, 1.0);
-    std::uniform_real_distribution<double> rand_un(-1.0, 1.0);
-#pragma omp parallel
+    
+    #pragma omp parallel
     {
-        #pragma omp for reduction(+: num_crosses)
+        std::mt19937_64 rng(seed);
+        std::normal_distribution<> rand_nrm(0.0, 1.0);
+        std::uniform_real_distribution<double> rand_un(-1.0, 1.0);
+
+        #pragma omp for reduction(+: num_crosses) //firstprivate(rng, rand_nrm, rand_un)
         for (ptrdiff_t i = 0; i < niter; ++i)
         {
             // generate a unit vector with a uniform rotation
