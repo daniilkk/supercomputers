@@ -43,13 +43,22 @@ performance_flops = np.array([
 
 # hw 2
 
-n_ops = 4.2e10 + 4
+#task 1
+n_ops_1 = 4.2e10 + 4
 
-timings = np.array([8.35, 4.84, 3.34, 2.71, 3.34])
-perfs = n_ops / timings / 1e9
+timings_1 = np.array([8.35, 4.84, 3.34, 2.71, 3.34])
+perfs_1 = n_ops_1 / timings_1 / 1e9
+
+
+timings_1 = np.array([9.36, 4.75, 2.47, 1.28, 0.93])
+
+
 n_threads = np.array([1, 2, 4, 8, 16]) 
 
-plt.plot(n_threads, perfs)
-plt.ylabel('Performance (Gflops)')
+
+
+plt.plot(n_threads, timings_1)
+# plt.ylabel('Performance (Gflops)')
+plt.ylabel('Execution time (seconds)')
 plt.xlabel('Amount of threads')
 plt.show()
